@@ -70,8 +70,23 @@ function init() {
   }
 
   //play sound button 
-  // -- want correct sound to play 
-  // -- shoot out confetti for party horn 
+  let button = document.querySelector('button');
+  button.addEventListener('click', playSound);
+
+  function playSound(event) {
+    currAudio.play();
+
+    //add special effect for confetti
+    if (currHorn.value == "party-horn"){
+      const jsConfetti = new JSConfetti();
+      jsConfetti.addConfetti({
+        confettiNumber: 500,
+        confettiRadius: 5,
+        emojis: ['⭐'],
+      });
+    }
+
+  }
 
 
 

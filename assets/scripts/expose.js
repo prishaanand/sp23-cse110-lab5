@@ -36,15 +36,38 @@ function init() {
     else {
       currImage.src = "assets/images/no-image.png"
     }
-    
+
   }
   
   //changing volume (set icon & audio)
-  // - zero volume = show mute icon, level 0
-  // - 1 to <33 volume = first volume level 
-  // - 33 to < 67 = second volume level 
-  // - 67+ = thrid volume level
-  // note: volume is not out of 100 
+  let volControl= document.getElementById('volume-controls');
+  let volImage = document.querySelector('img[src="assets/icons/volume-level-2.svg"]');
+  volControl.addEventListener('input', changeVol);
+
+  function changeVol(event) {
+
+    // - zero volume = show mute icon, level 0
+    if (event.target.value == 0) {
+      volImage.src = "assets/icons/volume-level-0.svg";
+    } 
+    // - 1 to <33 volume = first volume level 
+    else if (event.target.value >= 1 &&  event.target.value < 33) {
+      volImage.src = "assets/icons/volume-level-1.svg";
+    } 
+    // - 33 to < 67 = second volume level 
+    else if (event.target.value >= 33 && event.target.value < 67) {
+      volImage.src = "assets/icons/volume-level-2.svg";
+    } 
+
+    // - 67+ = thrid volume level
+    else if (event.target.value >= 67) {
+      volImage.src = "assets/icons/volume-level-3.svg";
+    } 
+
+    //note: volume default is not out of 100
+    currAudio.volume = event.target.value / 100;
+
+  }
 
   //play sound button 
   // -- want correct sound to play 

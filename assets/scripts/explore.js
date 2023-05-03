@@ -1,22 +1,22 @@
 // explore.js
 
-//ISSUE: the voices are not loading! 
-
 window.addEventListener('DOMContentLoaded', init);
 
 function init() {
 
   // set up variables 
+  const synth = window.speechSynthesis; 
   const inputText = document.getElementById('text-to-speak');
   const speakButton = document.querySelector('button');
   const voiceSelect = document.getElementById('voice-select');
   const faceImg = document.querySelector('img[alt="Smiling face"]');
 
   // load all available synth languages in drop down
-  const synth = window.speechSynthesis; 
+  
   function populateVoiceList() {
     const voices = synth.getVoices();
-    for (let i  = 0; i < voices.length(); i++){
+    console.log(voices);
+    for (let i  = 0; i < voices.length; i++){
 
       // create new dropdown option for each lang
       let option = document.createElement('option');

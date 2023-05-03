@@ -22,13 +22,6 @@ function init() {
       let option = document.createElement('option');
       option.textContent = `${voices[i].name} (${voices[i].lang})`;
       option.setAttribute('value', i);
-
-      // if (voices[i].default) {
-      //   option.textContent += " — DEFAULT";
-      // }
-  
-      // option.setAttribute("data-lang", voices[i].lang);
-      // option.setAttribute("data-name", voices[i].name);
       
       voiceSelect.appendChild(option);
 
@@ -37,28 +30,29 @@ function init() {
   populateVoiceList(); 
 
   // update current voice 
-  // const textVoice = new speechSynthesisUtterance();
-  // voiceSelect.addEventListener('change', () => {
-  //   const element = voiceSelect.value;
-  //   const voices = synth.getVoices();
-  //   const selectecVoice = voices[element];
-  //   textToSpeack.voice = selectecVoice;
-  // });
+  
+  voiceSelect.addEventListener('change', () => {
+    const element = voiceSelect.value;
+    const voices = synth.getVoices();
+    const selectecVoice = voices[element];
+    textToSpeak.voice = selectecVoice;
+  });
 
   // speak in selected lang
-  // speakButton.addEventListener('click', () => {
-  //   textVoice.text = inputText.value;
-  //   const voices = synth.getVoices();
-  //   const selectedVoice = voices[voiceSelect.value];
-  //   textVoice.voice = voiceSelect;
-  //  synth.speak(textVoice);
-  //   // swap face to open mouth only when speaking
-  //   faceImg.src = 'assets/images/smiling-open.png';
-  // });
+  const textToSpeak = new SpeechSynthesisUtterance();
+  speakButton.addEventListener('click', () => {
+    textToSpeak.text = inputText.value;
+    const voices = synth.getVoices();
+    const selectedVoice = voices[voiceSelect.value];
+    textToSpeak.voice = selectedVoice;
+    synth.speak(textToSpeak);
+    // swap face to open mouth only when speaking
+    faceImg.src = 'assets/images/smiling-open.png';
+  });
 
-  // // change face back to closed 
-  // textVoice.addEventListener('done', () => {
-  //   emoji.src = 'assets/images/smiling.png';
-  // });
+  // change face back to closed 
+  textToSpeak.addEventListener('end', () => {
+    faceImg.src = 'assets/images/smiling.png';
+  });
 
 }

@@ -30,7 +30,7 @@ function init() {
   populateVoiceList(); 
 
   // update current voice 
-  
+  const textToSpeak = new SpeechSynthesisUtterance();
   voiceSelect.addEventListener('change', () => {
     const element = voiceSelect.value;
     const voices = synth.getVoices();
@@ -39,7 +39,6 @@ function init() {
   });
 
   // speak in selected lang
-  const textToSpeak = new SpeechSynthesisUtterance();
   speakButton.addEventListener('click', () => {
     textToSpeak.text = inputText.value;
     const voices = synth.getVoices();
